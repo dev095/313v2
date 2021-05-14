@@ -11,4 +11,9 @@ public class LoginController {
     public String loginPage() {
         return "login";
     }
+
+    @GetMapping(value = "/admin/test")
+    public String testPage() {
+        return "test";
+    }
 }
