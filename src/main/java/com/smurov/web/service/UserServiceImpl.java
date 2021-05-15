@@ -48,6 +48,20 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    // save or update user
+    @Override
+    public void saveUser(User user) {
+
+        if (!user.getEmail().equals(userRepository.findUserByEmail(user.getEmail()))) {
+            if (user.getPassword().equals("")) {
+                user.setPassword(userRepository.findUserByEmail(user.getEmail()).getPassword());
+            } else {
+                user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            }
+            userRepository.save(user);
+        }
+    }
+
     @Override
     public void remove(Long id) {
         userRepository.deleteById(id);

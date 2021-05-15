@@ -12,8 +12,8 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping(value = "/admin/test")
-    public String testPage() {
-        return "test";
+    @GetMapping("/error")
+    public String errorPage() {
+        return "error";
     }
 }

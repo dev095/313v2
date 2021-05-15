@@ -66,19 +66,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
-                .antMatchers("/resources/**").anonymous()
-                .antMatchers("/test").anonymous()
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/test").permitAll()
                 // защищенные URL
                 .antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN')")
                 .antMatchers("/user").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
                 .anyRequest().authenticated();
 
-        http.userDetailsService(userDetailsService);
+//        http.userDetailsService(userDetailsService);
     }
 
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return userDetailsService;
-    }
+//    @Override
+//    protected UserDetailsService userDetailsService() {
+//        return userDetailsService;
+//    }
 
 }
