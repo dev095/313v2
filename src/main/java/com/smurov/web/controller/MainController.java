@@ -21,7 +21,12 @@ public class MainController {
     }
 
     @GetMapping("/main/test")
-    public String demoGet(){
+    public String testGet(){
         return "test";
+    }
+
+    @GetMapping("/main/demo")
+    public String demoGet(){
+        return "demo";
     }
 }
