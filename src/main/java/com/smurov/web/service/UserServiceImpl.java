@@ -21,7 +21,9 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(RoleRepository roleRepository, UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(RoleRepository roleRepository,
+                           UserRepository userRepository,
+                           BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -68,29 +70,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user, Long[] rolesId) {
-        Set<Role> roles = new HashSet<>();
-        User oldUser = userRepository.findUserById(user.getId());
-        if (rolesId != null) {
-            for (Long id : rolesId) {
-                roles.add(roleRepository.findRoleById(id));
-            }
-        } else {
-            roles = (Set<Role>) oldUser.getRoles();
-        }
-        user.setPassword(oldUser.getPassword());
-        user.setRoles(roles);
-        userRepository.save(user);
-    }
-
-    @Override
     public User getUserById(Long id) {
         return userRepository.findUserById(id);
     }
 
-    @Override
-    public boolean checkUserById(Long id) {
-        return userRepository.findUserById(id) == null;
-    }
 }
 
